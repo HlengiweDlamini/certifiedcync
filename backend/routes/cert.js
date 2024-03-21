@@ -3,7 +3,6 @@ const express= require('express')
 //CREATE INSTANCE OF EXPRESS ROUTER
 const router = express.Router();
 
-
 //IMPORT CERTS FUNCTIONS
 const { 
     getCerts, 
