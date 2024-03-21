@@ -4,8 +4,14 @@ const express= require('express')
 const router = express.Router();
 
 
-//IMPORT GETCERTS FUNCTION
-const { getCerts, newCertification, getSingleCert, updateCert} = require('../controllers/certController')
+//IMPORT CERTS FUNCTIONS
+const { 
+    getCerts, 
+    newCertification, 
+    getSingleCert, 
+    updateCert, 
+    deleteCert 
+} = require('../controllers/certController')
 
 
 //CREATE ROUTE FOR ALL CERTS, GETCERTS FUNCTION HANDLES ROUTE
@@ -17,8 +23,8 @@ router.route('/certification/:id').get(getSingleCert);
 //CREATE ROUTE FOR NEW CERT AND POST TO DATABASE
 router.route('/admin/certification/new').post(newCertification);
 
-//CREATE ROUTE FOR UPDATING CERT
-router.route('/admin/certification/:id').put(updateCert);
+//CREATE ROUTE FOR UPDATING AND DELETING CERT
+router.route('/admin/certification/:id').put(updateCert).delete(deleteCert);
 
 
 //EXPORT ROUTER OBJECT FOR OTHER PARTS OF APP TO USE IT
