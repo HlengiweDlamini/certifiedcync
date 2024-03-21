@@ -1,0 +1,73 @@
+
+[
+    {
+        "name": "Google Cybersecurity Certificate",
+        "organisation": "Google",
+        "description": "Prepare for a career as a cybersecurity analyst with a professional certificate from Google. Learn job-ready skills that are in-demand, like how to identify common risks, threats, and vulnerabilities, as well as the techniques to mitigate them.",
+        "link": "https://grow.google/intl/ALL_au/cybersecurity-certified-course/",
+        "faculty": "Science"
+    },
+    {
+        "name": "IBM Data Engineering Professional Certificate",
+        "organisation": "IBM",
+        "description": "Prepare for a career as a Data Engineer. Gain the in-demand skills and hands-on experience to get job-ready in less than 5 months. No prior experience required.",
+        "link": "https://www.coursera.org/professional-certificates/ibm-data-engineer",
+        "faculty": "Engineering"
+    },
+    {
+        "name": "Certified Manufacturing Engineer (CMfgE)",
+        "organisation": "SME",
+        "description": "Explore earning your CMfgE certification if you already have advanced manufacturing engineering experience. This certification is perfect for you if you are in a leadership position or have supported manufacturing practices and processes at your organization.",
+        "link": "https://www.sme.org/training/technical-certification/certified-manufacturing-engineer-cmfge-certification/",
+        "faculty": "Engineering"
+    },
+    {
+        "name": "Professional Software Developer Certification ",
+        "organisation": "IEEE Computer Society",
+        "description": "This professional competency certification requires successful completion of Certificates of Proficiency in the following four key knowledge areas: Software Engineering Requirements, Software Engineering Design, Software Engineering Construction, Software Engineering Testing and the successful completion of an online exam.",
+        "link": "https://www.computer.org/product/education/professional-software-developer-certification",
+        "faculty": "Science"
+    },
+    {
+        "name": "Intro to Machine Learning",
+        "organisation": "Kaggle",
+        "description": "Learn the core ideas in machine learning, and build your first models.",
+        "link": "https://www.kaggle.com/learn/intro-to-machine-learning",
+        "faculty": "Science"
+    },
+    {
+        "name": "Introduction to Front End Development",
+        "organisation": "SimpliLearn",
+        "description": "Front end development course is the best way to start learning valuable skills for designing the front end of websites. This course will discuss the main points and advantages of a free beginning study in front-end development. This program gives you a solid foundation in HTML, CSS, JavaScript, etc so you can speed up your front-end learning.",
+        "link": "https://www.simplilearn.com/front-end-developer-free-course-skillup",
+        "faculty": "Science"
+    },
+    {
+        "name": "Asbetos Awareness",
+        "organisation": "Alison",
+        "description": "This free online health and safety course explains how to manage the risks posed by the carcinogens found in asbestos.",
+        "link": "https://alison.com/course/asbestos-awareness",
+        "faculty": "Engineering"
+    },
+    {
+        "name": "Introduction to Cloud Computing",
+        "organisation": "SimpliLearn",
+        "description": "Acquire expertise in cloud architecture, hosting, and services. Master AWS, Azure, and Google Cloud concepts and earn a free cloud computing certification. Cloud computing skills are in high demand, and completing this course will equip you with valuable expertise, opening up numerous opportunities.",
+        "link": "https://www.simplilearn.com/introduction-to-cloud-computing-basics-skillup",
+        "faculty": "Science"
+    },
+    {
+        "name": "Professional Certificate of Competency in Chemical Engineering & Plant Design",
+        "organisation": "EIT",
+        "description": "This professional development course is designed for engineers and technicians who need practical knowledge in the fundamentals of chemical engineering, including plant layout and procedures.",
+        "link": "https://www.eit.edu.au/courses/professional-certificate-of-competency-in-chemical-engineering-plant-design/",
+        "faculty": "Engineering"
+    },
+    {
+        "name": "Professional Certificate of Competency in Power Distribution",
+        "organisation": "EIT",
+        "description": "This professional development course is designed for engineers and technicians who need to gain a practical understanding of power distribution, switchgear, power cables, transformers, power factor correction, earthing, lightning protection, and network studies.",
+        "link": "https://www.eit.edu.au/courses/professional-certificate-of-competency-power-distribution/",
+        "faculty": "Engineering"
+    }
+]
