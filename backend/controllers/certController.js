@@ -3,7 +3,7 @@
 //IMPORT CERTIFICATIONS
 const Certification = require('../models/certification');
 
-//CREATE NEW CERTIFICATION  THAT GOES TO /API/V1/CERTIFICATION/NEW
+//CREATE NEW CERTIFICATION  THAT GOES TO /API/V1/ADMIN/CERTIFICATION/NEW
 exports.newCertification = async (req, res, next) => {
     //GET ALL DATA FROM BODY TO CREATE NEW CERT
     const certification = await Certification.create(req.body);
@@ -45,3 +45,31 @@ exports.getSingleCert = async (req, res, next) => {
         certification
     })
 }
+//UPDATE CERTIFICATION THAT GOES TO API/V1/ADMIN/CERTIFICATION/:ID
+exports.updateCert = async (req, res, next) => {
+
+    //FIND CERT USING ASSIGNED ID; LET SO ITS REASSIGNABLE
+    let certification = await Certification.findById(req.params.id);
+
+    if(!certification) {
+        return res.status(404).json({
+            success: false,
+            message: 'Certification not found'
+        })
+    }
+    //UPDATE IF FOUND WITH REQUESTED BODY
+    certification = await Certification.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+
+    res.status(200).json({
+        success: true,
+        certification
+    })
+
+}
+
+
+
