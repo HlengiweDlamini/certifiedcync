@@ -9,6 +9,11 @@ const ErrorHandler = require("../utils/errorHandler");
 //IMPORT ASYNC ERROR HANDLER
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
+//IMPORT API FEATURES
+const APIFeatures = require('../utils/apiFeatures');
+
+//-------------------------------------FUNCTIONS--------------------------------------
+
 //CREATE NEW CERTIFICATION  THAT GOES TO /API/V1/ADMIN/CERTIFICATION/NEW
 exports.newCertification = catchAsyncErrors (async (req, res, next) => {
   //GET ALL DATA FROM BODY TO CREATE NEW CERT
@@ -22,8 +27,14 @@ exports.newCertification = catchAsyncErrors (async (req, res, next) => {
 
 //GET ALL CERTS THAT GOES TO API/V1/CERTIFICATIONS
 exports.getCerts = catchAsyncErrors (async (req, res, next) => {
+
+  //SEARCH BY KEYWORD
+  const apiFeatures = new APIFeatures(Certification.find(), req.query )
+                      .search()
+                      .filter()
+
   //GIVES ALL CERTS IN DATABASE
-  const certifications = await Certification.find();
+  const certifications = await apiFeatures.query;
 
   //SET HTTP STATUS CODE OF RESPONSE TO 200, INDICATES SUCCESSFUL RESPONSE
   res.status(200).json({
