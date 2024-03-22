@@ -24,8 +24,6 @@ router.route('/admin/certification/new').post(newCertification);
 //CREATE ROUTE FOR UPDATING AND DELETING CERT
 router.route('/admin/certification/:id').put(updateCert).delete(deleteCert);
 
-//CREATE ROUTE FOR SINGLE CERT, GETSINGLECERT FUNCTION HANDLES ROUTE
-//router.route('/certification/:id').get();
 
 //EXPORT ROUTER OBJECT FOR OTHER PARTS OF APP TO USE IT
 module.exports = router;

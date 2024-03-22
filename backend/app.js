@@ -8,8 +8,12 @@ app.use(express.json());
 
 //IMPORT ALL ROUTES
 const certifications = require('./routes/cert');
+const auth = require('./routes/auth');
 
 app.use('/api/v1', certifications);
+app.use('/api/v1', auth);
+
+
 //MIDDLEWARE TO HANDLE ALL ERRORS
 app.use(errorMiddleware);
 

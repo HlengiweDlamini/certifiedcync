@@ -1,7 +1,7 @@
-//IMPORT MONGOOSE & VALIDATOR
+//IMPORT MONGOOSE, VALIDATOR, BCRYPT
 const mongoose = require('mongoose');
 const validator = require('validator');
-
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -31,7 +31,14 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date
-        
+
+})
+//ENCRYPT PASSWORD BEFORE SAVING USER
+userSchema.pre('save', async function (next) {
+    if(!this.isModified('password')) {
+        next();
+    }
+    this.password = await bcrypt.hash(this.password, 10)
 })
 
 //EXPORT
