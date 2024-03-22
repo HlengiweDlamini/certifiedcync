@@ -28,10 +28,17 @@ exports.newCertification = catchAsyncErrors (async (req, res, next) => {
 //GET ALL CERTS THAT GOES TO API/V1/CERTIFICATIONS
 exports.getCerts = catchAsyncErrors (async (req, res, next) => {
 
+  //NUMBER OF CERTS DISPLAYED PER PAGE
+  const resPerPage = 4;
+
+  //SHOW TOTAL NUMBER OF CERTS ON FRONTEND
+  const certCount = await Certification.countDocuments();
+
   //SEARCH BY KEYWORD
   const apiFeatures = new APIFeatures(Certification.find(), req.query )
                       .search()
                       .filter()
+                      .pagination(resPerPage)
 
   //GIVES ALL CERTS IN DATABASE
   const certifications = await apiFeatures.query;
@@ -41,7 +48,8 @@ exports.getCerts = catchAsyncErrors (async (req, res, next) => {
     //.JSON SENDS JSON RESPONSE BACK TO CLIENT
     success: true, //SUCCESSFUL
     count: certifications.length, //NUMBER OF CERTS
-    certifications,
+    certCount,
+    certifications
   });
 });
 
