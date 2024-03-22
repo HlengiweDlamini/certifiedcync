@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backend/server.js",
     "dev": "NODE_ENV=development nodemon backend/server",
-    "prod": "NODE_ENV=production && nodemon backend/server",
+    "prod": "NODE_ENV=production nodemon backend/server",
     "seeder": "node backend/utils/seeder.js"
   },
   "repository": {

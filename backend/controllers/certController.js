@@ -3,8 +3,14 @@
 //IMPORT CERTIFICATIONS
 const Certification = require("../models/certification");
 
+//IMPORT ERROR HANDLER
+const ErrorHandler = require("../utils/errorHandler");
+
+//IMPORT ASYNC ERROR HANDLER
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+
 //CREATE NEW CERTIFICATION  THAT GOES TO /API/V1/ADMIN/CERTIFICATION/NEW
-exports.newCertification = async (req, res, next) => {
+exports.newCertification = catchAsyncErrors (async (req, res, next) => {
   //GET ALL DATA FROM BODY TO CREATE NEW CERT
   const certification = await Certification.create(req.body);
 
@@ -12,9 +18,10 @@ exports.newCertification = async (req, res, next) => {
     success: true,
     certification,
   });
-};
+});
+
 //GET ALL CERTS THAT GOES TO API/V1/CERTIFICATIONS
-exports.getCerts = async (req, res, next) => {
+exports.getCerts = catchAsyncErrors (async (req, res, next) => {
   //GIVES ALL CERTS IN DATABASE
   const certifications = await Certification.find();
 
@@ -25,34 +32,31 @@ exports.getCerts = async (req, res, next) => {
     count: certifications.length, //NUMBER OF CERTS
     certifications,
   });
-};
+});
+
 //GET SINGLE CERT DETAILS THAT GOES TO API/V1/CERTIFICATION/:ID
-exports.getSingleCert = async (req, res, next) => {
+exports.getSingleCert = catchAsyncErrors (async (req, res, next) => {
   //FINDS CERT USING ITS ID ASSIGNED BY MONGODB
   const certification = await Certification.findById(req.params.id);
 
   if (!certification) {
-    return res.status(404).json({
-      success: false,
-      message: "Certification not found",
-    });
+    return next(new ErrorHandler("Certification not found", 404));
   }
+
   //IF CERT IS FOUND
   res.status(200).json({
     success: true,
     certification,
   });
-};
+});
+
 //UPDATE CERTIFICATION THAT GOES TO API/V1/ADMIN/CERTIFICATION/:ID
-exports.updateCert = async (req, res, next) => {
+exports.updateCert = catchAsyncErrors (async (req, res, next) => {
   //FIND CERT USING ASSIGNED ID; LET SO ITS REASSIGNABLE
   let certification = await Certification.findById(req.params.id);
 
   if (!certification) {
-    return res.status(404).json({
-      success: false,
-      message: "Certification not found",
-    });
+    return next(new ErrorHandler("Certification not found", 404));
   }
   //UPDATE IF FOUND WITH REQUESTED BODY
   certification = await Certification.findByIdAndUpdate(
@@ -69,18 +73,16 @@ exports.updateCert = async (req, res, next) => {
     success: true,
     certification,
   });
-};
+});
+
 //DELETE CERTIFICATION THAT GOES TO API/VI/ADMIN/CERTIFICATION/:ID
-exports.deleteCert = async (req, res, next) => {
+exports.deleteCert = catchAsyncErrors (async (req, res, next) => {
   try {
     const certification = await Certification.findByIdAndDelete(req.params.id);
 
     //IF CERT NOT FOUND
     if (!certification) {
-      return res.status(404).json({
-        success: false,
-        message: "Certification not found",
-      });
+      return next(new ErrorHandler("Certification not found", 404));
     }
 
     res.status(200).json({
@@ -93,4 +95,4 @@ exports.deleteCert = async (req, res, next) => {
       message: "Internal server error",
     });
   }
-};
+});
