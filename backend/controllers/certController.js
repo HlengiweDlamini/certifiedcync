@@ -16,6 +16,9 @@ const APIFeatures = require('../utils/apiFeatures');
 
 //CREATE NEW CERTIFICATION  THAT GOES TO /API/V1/ADMIN/CERTIFICATION/NEW
 exports.newCertification = catchAsyncErrors (async (req, res, next) => {
+
+  req.body.user = req.user.id;
+  
   //GET ALL DATA FROM BODY TO CREATE NEW CERT
   const certification = await Certification.create(req.body);
 

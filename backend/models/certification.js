@@ -28,6 +28,11 @@ const certificationSchema = new mongoose.Schema({
             values: ['Engineering','Science'],
             message: 'Please select the correct faculty for this certification'
         }
+    }, 
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 
