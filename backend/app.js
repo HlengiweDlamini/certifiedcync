@@ -1,10 +1,14 @@
 //IMPORT EXPRESS
 const express = require('express');
 const app= express();
+
+const cookieParser = require('cookie-parser');
+
 //IMPORT MIDDLEWARE
 const errorMiddleware = require('./middlewares/errors');
 
 app.use(express.json());
+app.use(cookieParser());
 
 //IMPORT ALL ROUTES
 const certifications = require('./routes/cert');

@@ -12,8 +12,10 @@ const {
     deleteCert 
 } = require('../controllers/certController')
 
+const { isAuthenticatedUser } = require('../middlewares/auth');
+
 //CREATE ROUTE FOR ALL CERTS, GETCERTS FUNCTION HANDLES ROUTE
-router.route('/certifications').get(getCerts); //EXECUTED WHEN GET REQUEST IS MADE
+router.route('/certifications').get(isAuthenticatedUser, getCerts); //EXECUTED WHEN GET REQUEST IS MADE
 
 //CREATE ROUTE FOR SINGLE CERT, GETSINGLECERT FUNCTION HANDLES ROUTE
 router.route('/certification/:id').get(getSingleCert); 
