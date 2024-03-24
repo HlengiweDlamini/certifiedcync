@@ -4,6 +4,7 @@ const User = require('../models/user');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
+const sendEmail = require('../utils/sendEmail');
 
 //REGISTER USER: GOES TO API/V1/REGISTER
 exports.registerUser = catchAsyncErrors( async (req, res, next) => {
@@ -44,6 +45,49 @@ exports.loginUser = catchAsyncErrors ( async(req, res, next) => {
 
     sendToken(user, 200, res);
 })
+
+//FORGOT PASSWORD: THAT GOES TO API/V1/FOTGOT
+exports.forgotPassword = catchAsyncErrors( async(req, res, next) => {
+    
+    const user = await User.findOne({ email: req.body.email });
+
+    if(!user) {
+        return next(new ErrorHandler('User with this email not found', 401));
+    }
+
+    //GET RESET TOKEN
+    const resetToken = user.getResetPasswordToken();
+
+    await user.save({ validateBeforeSave: false });
+
+    //CREATE RESET PASSWORD URL
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+
+    const message = `Your password reset token is as follows:\n\n${resetUrl}\n\nIf you have not requested this email then ignore it.`;
+
+    try {
+        await sendEmail({
+            email: user.email,
+            subject: 'CertCync Password Recovery',
+            message
+        })
+
+        res.status(200).json({
+            success: true,
+            message: `Email sent to: ${user.email}`
+        })
+
+    } catch(error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+
+        await user.save({ validateBeforeSave: false });
+
+        return next (new ErrorHandler(error.message, 500));
+
+    }
+})
+
 //LOGOUT USER: GOES TO API/V1/LOGOUT
 exports.logout = catchAsyncErrors( async(req, res, next) => {
     res.cookie('token', null, {
