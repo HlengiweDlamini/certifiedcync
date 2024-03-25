@@ -149,6 +149,26 @@ exports.updatePassword = catchAsyncErrors( async(req, res, next) => {
 
 })
 
+//UPDATE USER PROFILE: GOES TO API/V1/PROFILE/UPDATE
+exports.updateProfile = catchAsyncErrors( async(req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email
+    }
+    //UPDATE AVATAR/PROFILE PICTURE
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true
+    })
+
+})
+
 //LOGOUT USER: GOES TO API/V1/LOGOUT
 exports.logout = catchAsyncErrors( async(req, res, next) => {
     res.cookie('token', null, {
@@ -159,5 +179,31 @@ exports.logout = catchAsyncErrors( async(req, res, next) => {
     res.status(200).json({
         success: true,
         message: 'logged out'
+    })
+})
+
+//-----------------------------------ADMIN ROUTES--------------------------------------
+
+//GET ALL USERS: GOES TO API/V1/ADMIN/USERS
+exports.allUsers = catchAsyncErrors( async(req, res, next) => {
+    const users = await User.find();
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+//GET USER DETAILS: GOES TO API/V1/ADMIN/USER/:ID
+exports.getUserDetails = catchAsyncErrors( async(req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+        return next(new ErrorHandler(`User with id: ${req.params.id} not found`));
+    }
+
+    res.status(200).json({
+        success: true,
+        user
     })
 })
