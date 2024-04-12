@@ -1,0 +1,17 @@
+/* CertificationItem.css */
+
+.certification-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .certification-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .certification-item p {
+    margin-bottom: 0;
+  }
+  

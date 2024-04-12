@@ -1,0 +1,27 @@
+/* CertPage.css */
+
+.certifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.certifications-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.certification-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.certification-item h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.certification-item p {
+  margin-bottom: 0;
+}
